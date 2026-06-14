@@ -87,7 +87,7 @@ namespace BestETFsByTD.Components
                 }
                 catch (Exception ex)
                 {
-                    Error += $"Errore per etf {e.Name}: \n{ex}";
+                    Error += $"An error occurred for ETF {e.Name}: \n{ex}";
                 }
             }
 

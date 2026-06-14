@@ -15,6 +15,8 @@ namespace BestETFsByTD.Components
 
         [Parameter] public EtfCategory Category { get; set; }
 
+        public bool IsLoading { get; set; }
+
         public List<EtfRow> Etfs { get; set; } = [];
 
         public bool FilterFC { get; set; } = true;
@@ -44,6 +46,8 @@ namespace BestETFsByTD.Components
 
         private async Task LoadData()
         {
+            IsLoading = true;
+            await InvokeAsync(StateHasChanged);
             Error = "";
             List<EtfInfo> list = [];
             try
@@ -90,7 +94,7 @@ namespace BestETFsByTD.Components
                     Error += $"An error occurred for ETF {e.Name}: \n{ex}";
                 }
             }
-
+            IsLoading = false;
             Etfs = etfRows;
         }
 

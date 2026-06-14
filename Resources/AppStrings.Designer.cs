@@ -205,7 +205,7 @@ namespace BestETFsByTD.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Countrary to the common definition, to better express the data here, the tracking difference is positive when the fund outperforms the index; otherwise, negative..
+        ///   Looks up a localized string similar to Countrary to how things are done usually, to better show the data here, the tracking difference is positive when the fund outperforms the index; otherwise, negative..
         /// </summary>
         public static string TableExplanation {
             get {

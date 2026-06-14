@@ -5,11 +5,9 @@
 
 @inject IStringLocalizer<AppStrings> localizer
 
-@if (Etfs == null)
-{
-    <p>@localizer["Loading"] ...</p>
-}
-else
+<FullscreenLoader Visible="IsLoading" />
+
+@if (Etfs != null)
 {
     <div class="filters">
         @foreach (EtfReplicationType replicationType in Enum.GetValues<EtfReplicationType>())

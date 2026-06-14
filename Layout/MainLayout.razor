@@ -4,11 +4,11 @@
 <div class="page">
     <main>
         <div class="top-row px-4 layout-header">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-
+            <a href="https://github.com/NandayDev/BestETFsByTrackingDifference" target="_blank">GitHub</a>
+            
             <select id="langSelector" class="lang-selector" @onchange="ChangeLanguage">
-                <option value="it-IT">🇮🇹 ITA</option>
                 <option value="en-US">🇬🇧 ENG</option>
+                <option value="it-IT">🇮🇹 ITA</option>
             </select>
         </div>
 
@@ -23,6 +23,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 12px;
     }
 
     .lang-selector {

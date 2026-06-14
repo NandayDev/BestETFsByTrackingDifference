@@ -201,3 +201,29 @@ th span.sort-arrow {
         transform: scale(1);
     }
 }
+
+.loader-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    backdrop-filter: blur(2px);
+}
+
+.spinner {
+    width: 64px;
+    height: 64px;
+    border: 6px solid #444;
+    border-top: 6px solid white;
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

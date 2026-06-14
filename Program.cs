@@ -16,7 +16,6 @@ builder.Services
 
 var host = builder.Build();
 
-// leggi la cultura da localStorage via JS
 var js = host.Services.GetRequiredService<IJSRuntime>();
 var savedCulture = await js.InvokeAsync<string>("blazorCulture.get");
 
@@ -27,7 +26,6 @@ if (!string.IsNullOrWhiteSpace(savedCulture))
     culture = new CultureInfo(savedCulture);
 }
 
-// imposta la cultura di default per il thread
 CultureInfo.DefaultThreadCurrentCulture = culture;
 CultureInfo.DefaultThreadCurrentUICulture = culture;
 

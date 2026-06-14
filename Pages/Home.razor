@@ -1,0 +1,27 @@
+﻿@page "/"
+@using BestETFsByTD.Models
+@using BestETFsByTD.Components
+@using Microsoft.Extensions.Localization
+@using BestETFsByTD.Resources
+
+@inject IStringLocalizer<AppStrings> localizer
+
+<h2>Seleziona categoria ETF</h2>
+
+<select @bind="SelectedCategory">
+    <option value="">-- @localizer["Select"] --</option>
+
+    @foreach (var cat in Enum.GetValues<EtfCategory>())
+    {
+        <option value="@cat">@cat.GetLocalizedName(localizer)</option>
+    }
+</select>
+
+@if (SelectedCategory.HasValue)
+{
+    <EtfTable Category="@SelectedCategory.Value" />
+}
+
+@code {
+    EtfCategory? SelectedCategory = null;
+}

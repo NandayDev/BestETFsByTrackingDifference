@@ -1,0 +1,64 @@
+﻿@using System.Globalization
+@using BestETFsByTD.Models
+@using BestETFsByTD.Resources
+@using Microsoft.Extensions.Localization
+
+@inject IStringLocalizer<AppStrings> localizer
+
+@if (Etfs == null)
+{
+    <p>@localizer["Loading"] ...</p>
+}
+else
+{
+    <div class="filters">
+        @foreach(EtfReplicationType replicationType in Enum.GetValues<EtfReplicationType>())
+        {
+            
+        }
+        <label><input type="checkbox" @bind="FilterFT" /> @localizer["ReplicationFull"]</label>
+        <label><input type="checkbox" @bind="FilterFC" /> @localizer["ReplicationSampling"]</label>
+        <label><input type="checkbox" @bind="FilterS" /> @localizer["ReplicationSynthetic"]</label>
+
+        <select @bind="StartYear">
+            @for (int y = 2012; y <= DateTime.Now.Year; y++)
+            {
+                <option value="@y">@y</option>
+            }
+        </select>
+    </div>
+
+    @if (Error != string.Empty)
+    {
+        <div class="error-box">
+            <strong>Errori:</strong><br/>@Error
+        </div>
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th @onclick="() => SortBy(nameof(EtfRow.Isin))">ISIN</th>
+                <th @onclick="() => SortBy(nameof(EtfRow.Name))">@localizer["Name"]</th>
+                <th @onclick="() => SortBy(nameof(EtfRow.ReplicationType))">@localizer["ReplicationType"]</th>
+                <th @onclick="() => SortBy(nameof(EtfRow.AverageTrackingDifference))">@localizer["AvgTrackingDifference"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var etf in FilteredEtfs)
+            {
+                string tdStyle = "positiveTD";
+                if (etf.AverageTrackingDifference < 0)
+                {
+                    tdStyle = "negativeTD";
+                }
+                <tr>
+                    <td>@etf.Isin</td>
+                    <td>@etf.Name</td>
+                    <td>@etf.ReplicationType</td>
+                    <td><p class="@tdStyle">@etf.AverageTrackingDifference.ToString("0.00")%</p></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

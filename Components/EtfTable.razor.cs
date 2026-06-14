@@ -21,13 +21,30 @@ namespace BestETFsByTD.Components
         public bool FilterFT { get; set; } = true;
         public bool FilterS { get; set; } = true;
 
-        public int StartYear { get; set; } = 2012;
+        private int startYear = 2023;
+        public int StartYear
+        {
+            get => startYear;
+            set
+            {
+                startYear = value;
+                _ = LoadDataAndRefresh();
+            }
+        }
+
+        public EtfRow? SelectedEtf { get; set; }
 
         private string SortColumn = nameof(EtfRow.AverageTrackingDifference);
         private bool SortAsc = false;
 
         protected override async Task OnParametersSetAsync()
         {
+            await LoadData();
+        }
+
+        private async Task LoadData()
+        {
+            Error = "";
             List<EtfInfo> list = [];
             try
             {
@@ -45,6 +62,12 @@ namespace BestETFsByTD.Components
                 try
                 {
                     List<EtfPerformance> perf = await DataService.LoadPerformance(Category, e.Isin);
+
+                    if (!perf.Any(p => p.Year == StartYear))
+                    {
+                        continue;
+                    }
+
                     IEnumerable<EtfPerformance> filtered = perf.Where(p => p.Year >= StartYear);
 
                     double avg = filtered.Any()
@@ -56,18 +79,25 @@ namespace BestETFsByTD.Components
                         Name: e.Name,
                         ReplicationType: e.ReplicationType,
                         ReplicationTypeString: e.ReplicationType.GetLocalizedName(Localizer),
-                        AverageTrackingDifference: avg
+                        AverageTrackingDifference: avg,
+                        Performances: [.. perf.OrderBy(p => p.Year)]
                     );
 
                     etfRows.Add(etfRow);
                 }
                 catch (Exception ex)
                 {
-                    Error += $"\n{ex}";
+                    Error += $"Errore per etf {e.Name}: \n{ex}";
                 }
             }
 
             Etfs = etfRows;
+        }
+
+        private async Task LoadDataAndRefresh()
+        {
+            await LoadData();
+            await InvokeAsync(StateHasChanged);
         }
 
         private IEnumerable<EtfRow> FilteredEtfs
@@ -97,6 +127,14 @@ namespace BestETFsByTD.Components
                 _ => e.Isin
             };
 
+        private string GetSortArrow(string column)
+        {
+            if (SortColumn != column)
+                return string.Empty;
+
+            return SortAsc ? "▲" : "▼";
+        }
+
         private void SortBy(string column)
         {
             if (SortColumn == column)
@@ -112,7 +150,16 @@ namespace BestETFsByTD.Components
                 : [.. Etfs.OrderByDescending(e => GetSortValue(e))];
         }
 
-        public record EtfRow(string Isin, string Name, EtfReplicationType ReplicationType, string ReplicationTypeString, double AverageTrackingDifference);
-    }
+        public void OpenDialog(EtfRow etf)
+        {
+            SelectedEtf = etf;
+        }
 
+        public void CloseDialog()
+        {
+            SelectedEtf = null;
+        }
+
+        public record EtfRow(string Isin, string Name, EtfReplicationType ReplicationType, string ReplicationTypeString, double AverageTrackingDifference, List<EtfPerformance> Performances);
+    }
 }

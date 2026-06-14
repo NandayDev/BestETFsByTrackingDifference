@@ -121,13 +121,22 @@
     <value>All World</value>
   </data>
   <data name="AvgTrackingDifference" xml:space="preserve">
-    <value>Tracking Difference media</value>
+    <value>T.D. media</value>
   </data>
   <data name="Developed" xml:space="preserve">
     <value>Sviluppati</value>
   </data>
+  <data name="Disclaimer" xml:space="preserve">
+    <value>Disclaimer: Dati, stime, rendimenti, simulazioni e calcoli riportati potrebbero contenere errori, imprecisioni o semplificazioni e non sono garantiti né necessariamente aggiornati o veritieri. Prima di effettuare qualsiasi investimento valuta autonomamente i rischi e consulta un professionista abilitato.</value>
+  </data>
   <data name="Emerging" xml:space="preserve">
     <value>Emergenti</value>
+  </data>
+  <data name="FilterETFYear" xml:space="preserve">
+    <value>Considera solo T.D. dall'anno:</value>
+  </data>
+  <data name="Link" xml:space="preserve">
+    <value>Link</value>
   </data>
   <data name="Loading" xml:space="preserve">
     <value>Caricamento</value>
@@ -136,21 +145,30 @@
     <value>Nome</value>
   </data>
   <data name="ReplicationFull" xml:space="preserve">
-    <value>Replica Totale</value>
+    <value>Totale</value>
   </data>
   <data name="ReplicationHybrid" xml:space="preserve">
-    <value>Replica Ibrida</value>
+    <value>Ibrida</value>
   </data>
   <data name="ReplicationSampling" xml:space="preserve">
-    <value>Replica Ottimizzata</value>
+    <value>Campionamento</value>
   </data>
   <data name="ReplicationSynthetic" xml:space="preserve">
-    <value>Replica Sintetica</value>
+    <value>Sintetica</value>
   </data>
   <data name="ReplicationType" xml:space="preserve">
     <value>Tipo di replica</value>
   </data>
   <data name="Select" xml:space="preserve">
     <value>Seleziona</value>
+  </data>
+  <data name="SelectETFCategory" xml:space="preserve">
+    <value>Seleziona categoria ETF</value>
+  </data>
+  <data name="TableExplanation" xml:space="preserve">
+    <value>Al contrario della definizione comune, ho mostrato la Tracking Difference (T.D. media) come positiva quando l'ETF performa meglio dell'indice; viceversa, negativa</value>
+  </data>
+  <data name="TrackingDifferenceByYear" xml:space="preserve">
+    <value>Tracking Difference per anno</value>
   </data>
 </root>

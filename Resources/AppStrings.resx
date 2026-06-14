@@ -121,13 +121,22 @@
     <value>All World</value>
   </data>
   <data name="AvgTrackingDifference" xml:space="preserve">
-    <value>Avg. Tracking Difference</value>
+    <value>Avg. T.D.</value>
   </data>
   <data name="Developed" xml:space="preserve">
     <value>Developed</value>
   </data>
+  <data name="Disclaimer" xml:space="preserve">
+    <value>Disclaimer: Data, estimates, returns, simulations and calculations provided may contain errors, inaccuracies or simplifications and are not guaranteed, nor necessarily up‑to‑date or accurate. Before making any investment, independently assess the risks and consult a qualified professional.</value>
+  </data>
   <data name="Emerging" xml:space="preserve">
     <value>Emerging</value>
+  </data>
+  <data name="FilterETFYear" xml:space="preserve">
+    <value>Consider only T.D. since:</value>
+  </data>
+  <data name="Link" xml:space="preserve">
+    <value>Link</value>
   </data>
   <data name="Loading" xml:space="preserve">
     <value>Loading</value>
@@ -136,21 +145,30 @@
     <value>Name</value>
   </data>
   <data name="ReplicationFull" xml:space="preserve">
-    <value>Full Replication</value>
+    <value>Full</value>
   </data>
   <data name="ReplicationHybrid" xml:space="preserve">
-    <value>Hybrid Replication</value>
+    <value>Hybrid</value>
   </data>
   <data name="ReplicationSampling" xml:space="preserve">
     <value>Sampling</value>
   </data>
   <data name="ReplicationSynthetic" xml:space="preserve">
-    <value>Synthetic Replication</value>
+    <value>Synthetic</value>
   </data>
   <data name="ReplicationType" xml:space="preserve">
     <value>Replication Type</value>
   </data>
   <data name="Select" xml:space="preserve">
     <value>Select</value>
+  </data>
+  <data name="SelectETFCategory" xml:space="preserve">
+    <value>Select ETF category</value>
+  </data>
+  <data name="TableExplanation" xml:space="preserve">
+    <value>Countrary to the common definition, to better express the data here, the tracking difference is positive when the fund outperforms the index; otherwise, negative.</value>
+  </data>
+  <data name="TrackingDifferenceByYear" xml:space="preserve">
+    <value>Tracking Difference by year</value>
   </data>
 </root>

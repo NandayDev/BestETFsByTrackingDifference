@@ -1,8 +1,15 @@
 ﻿@inherits LayoutComponentBase
+@inject IJSRuntime JS
+
 <div class="page">
     <main>
-        <div class="top-row px-4">
+        <div class="top-row px-4 layout-header">
             <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+
+            <select id="langSelector" class="lang-selector" @onchange="ChangeLanguage">
+                <option value="it-IT">🇮🇹 ITA</option>
+                <option value="en-US">🇬🇧 ENG</option>
+            </select>
         </div>
 
         <article class="content px-4">
@@ -10,3 +17,45 @@
         </article>
     </main>
 </div>
+
+<style>
+    .layout-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .lang-selector {
+        padding: 4px 8px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 0.9rem;
+    }
+</style>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Legge la lingua salvata
+            var culture = await JS.InvokeAsync<string>("blazorCulture.get");
+
+            if (!string.IsNullOrWhiteSpace(culture))
+            {
+                // Imposta il valore del select
+                await JS.InvokeVoidAsync("setLanguageSelector", culture);
+            }
+        }
+    }
+
+    private async Task ChangeLanguage(ChangeEventArgs e)
+    {
+        var culture = e.Value?.ToString();
+        if (culture is null)
+            return;
+
+        await JS.InvokeVoidAsync("blazorCulture.set", culture);
+        await JS.InvokeVoidAsync("location.reload");
+    }
+}

@@ -12,16 +12,17 @@
 else
 {
     <div class="filters">
-        @foreach(EtfReplicationType replicationType in Enum.GetValues<EtfReplicationType>())
+        @foreach (EtfReplicationType replicationType in Enum.GetValues<EtfReplicationType>())
         {
-            
+
         }
         <label><input type="checkbox" @bind="FilterFT" /> @localizer["ReplicationFull"]</label>
         <label><input type="checkbox" @bind="FilterFC" /> @localizer["ReplicationSampling"]</label>
         <label><input type="checkbox" @bind="FilterS" /> @localizer["ReplicationSynthetic"]</label>
-
+        <br/>
+        @localizer["FilterETFYear"] 
         <select @bind="StartYear">
-            @for (int y = 2012; y <= DateTime.Now.Year; y++)
+            @for (int y = 2012; y < 2026; y++)
             {
                 <option value="@y">@y</option>
             }
@@ -35,30 +36,77 @@ else
         </div>
     }
 
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
-                <th @onclick="() => SortBy(nameof(EtfRow.Isin))">ISIN</th>
-                <th @onclick="() => SortBy(nameof(EtfRow.Name))">@localizer["Name"]</th>
-                <th @onclick="() => SortBy(nameof(EtfRow.ReplicationType))">@localizer["ReplicationType"]</th>
-                <th @onclick="() => SortBy(nameof(EtfRow.AverageTrackingDifference))">@localizer["AvgTrackingDifference"]</th>
+                <th @onclick="() => SortBy(nameof(EtfRow.Isin))">
+                    ISIN @GetSortArrow(nameof(EtfRow.Isin))
+                </th>
+                <th @onclick="() => SortBy(nameof(EtfRow.Name))">
+                    @localizer["Name"] @GetSortArrow(nameof(EtfRow.Name))
+                </th>
+                <th>@localizer["Link"]</th>
+                <th @onclick="() => SortBy(nameof(EtfRow.ReplicationType))">
+                    @localizer["ReplicationType"] @GetSortArrow(nameof(EtfRow.ReplicationType))
+                </th>
+                <th @onclick="() => SortBy(nameof(EtfRow.AverageTrackingDifference))">
+                    @localizer["AvgTrackingDifference"] @GetSortArrow(nameof(EtfRow.AverageTrackingDifference))
+                </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var etf in FilteredEtfs)
             {
-                string tdStyle = "positiveTD";
-                if (etf.AverageTrackingDifference < 0)
-                {
-                    tdStyle = "negativeTD";
-                }
-                <tr>
+                string tdStyle = etf.AverageTrackingDifference < 0 ? "negativeTD" : "positiveTD";
+
+                <tr @onclick="() => OpenDialog(etf)">
                     <td>@etf.Isin</td>
                     <td>@etf.Name</td>
-                    <td>@etf.ReplicationType</td>
+                    <td>
+                        <a class="external-links" target="_blank" href="https://www.justetf.com/it/etf-profile.html?isin=@etf.Isin">JustETF</a>
+                        <a class="external-links" target="_blank" href="https://www.trackingdifferences.com/ETF/ISIN/@etf.Isin">TD.com</a>
+                    </td>
+                    <td>@etf.ReplicationTypeString</td>
                     <td><p class="@tdStyle">@etf.AverageTrackingDifference.ToString("0.00")%</p></td>
                 </tr>
             }
         </tbody>
     </table>
+
+    <p style="font-style:italic; font-size: 14px">@localizer["TableExplanation"]</p>
+    <br />
+    <br />
+    <p style="font-size: 10px">@localizer["Disclaimer"]</p>
+
+    @if (SelectedEtf != null)
+    {
+        <div class="dialog-overlay" @onclick="CloseDialog">
+            <div class="dialog-box" @onclick:stopPropagation="true">
+                <span class="dialog-close" @onclick="CloseDialog">✖</span>
+
+                <h3>@SelectedEtf.Name (@SelectedEtf.Isin)</h3>
+                <p><strong>@localizer["ReplicationType"]:</strong> @SelectedEtf.ReplicationTypeString</p>
+
+                <h4>@localizer["TrackingDifferenceByYear"]</h4>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>@localizer["Year"]</th>
+                            <th>@localizer["TrackingDifference"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var perf in SelectedEtf.Performances)
+                        {
+                            <tr>
+                                <td>@perf.Year</td>
+                                <td>@perf.TrackingDifference.ToString("0.00")%</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
 }

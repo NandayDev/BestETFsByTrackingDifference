@@ -6,7 +6,7 @@
 
 @inject IStringLocalizer<AppStrings> localizer
 
-<h2>Seleziona categoria ETF</h2>
+<h2>@localizer["SelectETFCategory"]</h2>
 
 <select @bind="SelectedCategory">
     <option value="">-- @localizer["Select"] --</option>
@@ -19,6 +19,7 @@
 
 @if (SelectedCategory.HasValue)
 {
+    <br/><br/>
     <EtfTable Category="@SelectedCategory.Value" />
 }
 

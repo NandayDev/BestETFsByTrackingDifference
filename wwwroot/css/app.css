@@ -133,3 +133,71 @@ code {
     color: orangered;
     font-weight: bold;
 }
+
+.external-links {
+    font-size: 8px
+}
+
+th {
+    cursor: pointer;
+}
+
+th span.sort-arrow {
+    margin-left: 4px;
+    font-size: 0.8rem;
+}
+
+/* Righe cliccabili */
+.table tbody tr {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f0f8ff;
+}
+
+/* Overlay scuro */
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Dialog */
+.dialog-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 420px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    animation: fadeIn 0.2s ease-out;
+}
+
+.dialog-close {
+    float: right;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

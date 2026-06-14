@@ -70,7 +70,7 @@ namespace BestETFsByTD.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Avg. Tracking Difference.
+        ///   Looks up a localized string similar to Avg. T.D..
         /// </summary>
         public static string AvgTrackingDifference {
             get {
@@ -88,11 +88,38 @@ namespace BestETFsByTD.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disclaimer: Data, estimates, returns, simulations and calculations provided may contain errors, inaccuracies or simplifications and are not guaranteed, nor necessarily up‑to‑date or accurate. Before making any investment, independently assess the risks and consult a qualified professional..
+        /// </summary>
+        public static string Disclaimer {
+            get {
+                return ResourceManager.GetString("Disclaimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Emerging.
         /// </summary>
         public static string Emerging {
             get {
                 return ResourceManager.GetString("Emerging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consider only T.D. since:.
+        /// </summary>
+        public static string FilterETFYear {
+            get {
+                return ResourceManager.GetString("FilterETFYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Link.
+        /// </summary>
+        public static string Link {
+            get {
+                return ResourceManager.GetString("Link", resourceCulture);
             }
         }
         
@@ -115,7 +142,7 @@ namespace BestETFsByTD.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Full Replication.
+        ///   Looks up a localized string similar to Full.
         /// </summary>
         public static string ReplicationFull {
             get {
@@ -124,7 +151,7 @@ namespace BestETFsByTD.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hybrid Replication.
+        ///   Looks up a localized string similar to Hybrid.
         /// </summary>
         public static string ReplicationHybrid {
             get {
@@ -142,7 +169,7 @@ namespace BestETFsByTD.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Synthetic Replication.
+        ///   Looks up a localized string similar to Synthetic.
         /// </summary>
         public static string ReplicationSynthetic {
             get {
@@ -165,6 +192,33 @@ namespace BestETFsByTD.Resources {
         public static string Select {
             get {
                 return ResourceManager.GetString("Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select ETF category.
+        /// </summary>
+        public static string SelectETFCategory {
+            get {
+                return ResourceManager.GetString("SelectETFCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Countrary to the common definition, to better express the data here, the tracking difference is positive when the fund outperforms the index; otherwise, negative..
+        /// </summary>
+        public static string TableExplanation {
+            get {
+                return ResourceManager.GetString("TableExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tracking Difference by year.
+        /// </summary>
+        public static string TrackingDifferenceByYear {
+            get {
+                return ResourceManager.GetString("TrackingDifferenceByYear", resourceCulture);
             }
         }
     }

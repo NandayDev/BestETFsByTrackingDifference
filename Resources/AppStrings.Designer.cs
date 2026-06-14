@@ -142,6 +142,15 @@ namespace BestETFsByTD.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No ETF available with current filters..
+        /// </summary>
+        public static string NoETFText {
+            get {
+                return ResourceManager.GetString("NoETFText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Full.
         /// </summary>
         public static string ReplicationFull {
@@ -210,6 +219,15 @@ namespace BestETFsByTD.Resources {
         public static string TableExplanation {
             get {
                 return ResourceManager.GetString("TableExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tracking Diff..
+        /// </summary>
+        public static string TrackingDifference {
+            get {
+                return ResourceManager.GetString("TrackingDifference", resourceCulture);
             }
         }
         

@@ -68,10 +68,18 @@
                     <td><p class="@tdStyle">@etf.AverageTrackingDifference.ToString("0.00")%</p></td>
                 </tr>
             }
+            
         </tbody>
     </table>
 
-    <p style="font-style:italic; font-size: 14px">@localizer["TableExplanation"]</p>
+    @if (!FilteredEtfs.Any())
+    {
+        <center><p style="font-style: italic">@localizer["NoETFText"]</p></center>
+    }
+    else
+    {
+        <p style="font-style:italic; font-size: 14px">@localizer["TableExplanation"]</p>
+    }
     <br />
     <br />
     <p style="font-size: 10px">@localizer["Disclaimer"]</p>
@@ -90,16 +98,17 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>@localizer["Year"]</th>
-                            <th>@localizer["TrackingDifference"]</th>
+                            <th style="text-align:center">@localizer["Year"]</th>
+                            <th style="text-align:center">@localizer["TrackingDifference"]</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var perf in SelectedEtf.Performances)
                         {
+                            string color = perf.Year >= StartYear ? "#FFFF0080" : "transparent";
                             <tr>
-                                <td>@perf.Year</td>
-                                <td>@perf.TrackingDifference.ToString("0.00")%</td>
+                                <td style="text-align:center; background-color:@color;">@perf.Year</td>
+                                <td style="text-align:center; background-color:@color;">@perf.TrackingDifference.ToString("0.00")%</td>
                             </tr>
                         }
                     </tbody>

@@ -16,17 +16,30 @@ builder.Services
 
 var host = builder.Build();
 
-var js = host.Services.GetRequiredService<IJSRuntime>();
-var savedCulture = await js.InvokeAsync<string>("blazorCulture.get");
+await InitializeLocalization(host);
 
-CultureInfo culture = CultureInfo.DefaultThreadCurrentCulture ?? new CultureInfo("en-GB");
-
-if (!string.IsNullOrWhiteSpace(savedCulture))
-{
-    culture = new CultureInfo(savedCulture);
-}
-
-CultureInfo.DefaultThreadCurrentCulture = culture;
-CultureInfo.DefaultThreadCurrentUICulture = culture;
+InitializeDataService(host);
 
 await host.RunAsync();
+
+static async Task InitializeLocalization(WebAssemblyHost host)
+{
+    var js = host.Services.GetRequiredService<IJSRuntime>();
+    var savedCulture = await js.InvokeAsync<string>("blazorCulture.get");
+
+    CultureInfo culture = CultureInfo.DefaultThreadCurrentCulture ?? new CultureInfo("en-GB");
+
+    if (!string.IsNullOrWhiteSpace(savedCulture))
+    {
+        culture = new CultureInfo(savedCulture);
+    }
+
+    CultureInfo.DefaultThreadCurrentCulture = culture;
+    CultureInfo.DefaultThreadCurrentUICulture = culture;
+}
+
+static void InitializeDataService(WebAssemblyHost host)
+{
+    IDataService dataService = host.Services.GetRequiredService<IDataService>();
+    dataService.StartLoadingCache();
+}

@@ -1,24 +1,44 @@
 ﻿using BestETFsByTD.Models;
-using BestETFsByTD.Resources;
-using Microsoft.Extensions.Localization;
+using System.Collections.Concurrent;
 using System.Globalization;
 
 namespace BestETFsByTD.Services
 {
     public interface IDataService
     {
+        void StartLoadingCache();
+
         Task<List<EtfInfo>> LoadEtfList(EtfCategory category);
 
         Task<List<EtfPerformance>> LoadPerformance(EtfCategory category, string isin);
     }
 
-    public class DataService(HttpClient httpClient, IStringLocalizer<AppStrings> localizer) : IDataService
+    public class DataService(HttpClient httpClient) : IDataService
     {
+        private readonly ConcurrentDictionary<EtfCategory, List<EtfInfo>> infosCache = [];
+        private readonly ConcurrentDictionary<string, List<EtfPerformance>> performancesCache = [];
+
+        public async void StartLoadingCache()
+        {
+            foreach (EtfCategory category in Enum.GetValues<EtfCategory>())
+            {
+                List<EtfInfo> etfList = await LoadEtfList(category);
+                foreach (EtfInfo etf in etfList)
+                {
+                    _ = LoadPerformance(category, etf.Isin);
+                }
+            }
+        }
+
         public async Task<List<EtfInfo>> LoadEtfList(EtfCategory category)
         {
+            if (infosCache.TryGetValue(category, out List<EtfInfo>? etfInfos))
+            {
+                return etfInfos;
+            }
+            etfInfos = [];
             var csv = await httpClient.GetStringAsync("etfs.csv");
             var csvLines = csv.Split('\n');
-            List<EtfInfo> etfInfos = [];
             for (int i = 1; i < csvLines.Length; i++)
             {
                 var line = csvLines[i];
@@ -32,18 +52,26 @@ namespace BestETFsByTD.Services
                     etfInfos.Add(etfInfo);
                 }
             }
+            infosCache[category] = etfInfos;
             return etfInfos;
         }
 
         public async Task<List<EtfPerformance>> LoadPerformance(EtfCategory category, string isin)
         {
+            if (performancesCache.TryGetValue(isin, out List<EtfPerformance>? performances))
+            {
+                return performances;
+            }
+
             string categoryName = category.GetPath();
             var csv = await httpClient.GetStringAsync($"{categoryName}/{isin}.csv");
 
-            return [.. csv.Split('\n')
+            performances = [.. csv.Split('\n')
                       .Skip(1)
                       .Where(l => !string.IsNullOrWhiteSpace(l))
                       .Select(ParsePerf)];
+            performancesCache[isin] = performances;
+            return performances;
         }
 
         private static EtfInfo ParseEtf(string line)

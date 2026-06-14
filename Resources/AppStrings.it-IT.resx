@@ -144,6 +144,9 @@
   <data name="Name" xml:space="preserve">
     <value>Nome</value>
   </data>
+  <data name="NoETFText" xml:space="preserve">
+    <value>Nessun ETF disponibile con gli attuali filtri.</value>
+  </data>
   <data name="ReplicationFull" xml:space="preserve">
     <value>Totale</value>
   </data>
@@ -167,6 +170,9 @@
   </data>
   <data name="TableExplanation" xml:space="preserve">
     <value>Al contrario della prassi comune, per non causare emicranie negli utenti, ho mostrato la Tracking Difference (T.D. media) come positiva quando l'ETF performa meglio dell'indice; viceversa, negativa</value>
+  </data>
+  <data name="TrackingDifference" xml:space="preserve">
+    <value>Tracking Diff.</value>
   </data>
   <data name="TrackingDifferenceByYear" xml:space="preserve">
     <value>Tracking Difference per anno</value>

@@ -144,6 +144,9 @@
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="NoETFText" xml:space="preserve">
+    <value>No ETF available with current filters.</value>
+  </data>
   <data name="ReplicationFull" xml:space="preserve">
     <value>Full</value>
   </data>
@@ -167,6 +170,9 @@
   </data>
   <data name="TableExplanation" xml:space="preserve">
     <value>Countrary to how things are done usually, to better show the data here, the tracking difference is positive when the fund outperforms the index; otherwise, negative.</value>
+  </data>
+  <data name="TrackingDifference" xml:space="preserve">
+    <value>Tracking Diff.</value>
   </data>
   <data name="TrackingDifferenceByYear" xml:space="preserve">
     <value>Tracking Difference by year</value>

@@ -114,8 +114,8 @@ namespace BestETFsByTD.Components
                         (FilterFT && e.ReplicationType == EtfReplicationType.FULL) ||
                         (FilterS && e.ReplicationType == EtfReplicationType.SYNTHETIC));
                 return SortAsc
-                ? [.. Etfs.OrderBy(e => GetSortValue(e))]
-                : [.. Etfs.OrderByDescending(e => GetSortValue(e))];
+                ? [.. filtered.OrderBy(e => GetSortValue(e))]
+                : [.. filtered.OrderByDescending(e => GetSortValue(e))];
             }
         }
 

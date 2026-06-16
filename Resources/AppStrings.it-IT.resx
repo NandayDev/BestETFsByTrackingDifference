@@ -177,4 +177,10 @@
   <data name="TrackingDifferenceByYear" xml:space="preserve">
     <value>Tracking Difference per anno</value>
   </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Comparazione ETF per TD</value>
+  </data>
+  <data name="Overperformance" xml:space="preserve">
+    <value>Sovraperf.</value>
+  </data>
 </root>

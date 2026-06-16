@@ -47,8 +47,14 @@
                 <th @onclick="() => SortBy(nameof(EtfRow.ReplicationType))">
                     @localizer["ReplicationType"] @GetSortArrow(nameof(EtfRow.ReplicationType))
                 </th>
-                <th @onclick="() => SortBy(nameof(EtfRow.AverageTrackingDifference))">
+                <th @onclick="() => SortBy(nameof(EtfRow.Ter))" style="text-align: center;">
+                    TER @GetSortArrow(nameof(EtfRow.Ter))
+                </th>
+                <th @onclick="() => SortBy(nameof(EtfRow.AverageTrackingDifference))" style="text-align: center;">
                     @localizer["AvgTrackingDifference"] @GetSortArrow(nameof(EtfRow.AverageTrackingDifference))
+                </th>
+                <th @onclick="() => SortBy(nameof(EtfRow.Overperformance))" style="text-align: center;">
+                    @localizer["Overperformance"] @GetSortArrow(nameof(EtfRow.Overperformance))
                 </th>
             </tr>
         </thead>
@@ -65,7 +71,9 @@
                         <a class="external-links" target="_blank" href="https://www.trackingdifferences.com/ETF/ISIN/@etf.Isin">TD.com</a>
                     </td>
                     <td>@etf.ReplicationTypeString</td>
-                    <td><p class="@tdStyle">@etf.AverageTrackingDifference.ToString("0.00")%</p></td>
+                    <td style="text-align: center;">@etf.Ter.ToString("0.00")%</td>
+                    <td style="text-align: center;"><p class="@tdStyle">@etf.AverageTrackingDifference.ToString("0.00")%</p></td>
+                    <td style="text-align: center;">@etf.Overperformance.ToString("0.00")%</td>
                 </tr>
             }
             
@@ -92,6 +100,7 @@
 
                 <h3>@SelectedEtf.Name (@SelectedEtf.Isin)</h3>
                 <p><strong>@localizer["ReplicationType"]:</strong> @SelectedEtf.ReplicationTypeString</p>
+                <p><strong>TER:</strong> @SelectedEtf.Ter.ToString("0.00")%</p>
 
                 <h4>@localizer["TrackingDifferenceByYear"]</h4>
 

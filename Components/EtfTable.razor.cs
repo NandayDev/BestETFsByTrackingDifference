@@ -78,12 +78,16 @@ namespace BestETFsByTD.Components
                         ? filtered.Average(p => p.TrackingDifference)
                         : 0;
 
+                    double overperformance = avg + e.Ter;
+
                     EtfRow etfRow = new(
                         Isin: e.Isin,
                         Name: e.Name,
                         ReplicationType: e.ReplicationType,
                         ReplicationTypeString: e.ReplicationType.GetLocalizedName(Localizer),
                         AverageTrackingDifference: avg,
+                        Ter: e.Ter,
+                        Overperformance: overperformance,
                         Performances: [.. perf.OrderBy(p => p.Year)]
                     );
 
@@ -127,6 +131,8 @@ namespace BestETFsByTD.Components
                 nameof(EtfRow.Isin) => e.Isin,
                 nameof(EtfRow.Name) => e.Name,
                 nameof(EtfRow.ReplicationType) => e.ReplicationType,
+                nameof(EtfRow.Ter) => e.Ter,
+                nameof(EtfRow.Overperformance) => e.Overperformance,
                 nameof(EtfRow.AverageTrackingDifference) => e.AverageTrackingDifference,
                 _ => e.Isin
             };
@@ -164,6 +170,6 @@ namespace BestETFsByTD.Components
             SelectedEtf = null;
         }
 
-        public record EtfRow(string Isin, string Name, EtfReplicationType ReplicationType, string ReplicationTypeString, double AverageTrackingDifference, List<EtfPerformance> Performances);
+        public record EtfRow(string Isin, string Name, EtfReplicationType ReplicationType, string ReplicationTypeString, double AverageTrackingDifference, double Ter, double Overperformance, List<EtfPerformance> Performances);
     }
 }

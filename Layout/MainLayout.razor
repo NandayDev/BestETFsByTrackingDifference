@@ -1,5 +1,10 @@
 ﻿@inherits LayoutComponentBase
+@using BestETFsByTD.Resources
+@using Microsoft.Extensions.Localization
 @inject IJSRuntime JS
+@inject IStringLocalizer<AppStrings> localizer
+
+<PageTitle>@localizer["PageTitle"]</PageTitle>
 
 <div class="page">
     <main>

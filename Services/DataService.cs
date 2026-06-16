@@ -81,7 +81,8 @@ namespace BestETFsByTD.Services
                 Isin: parts[0],
                 Name: parts[1],
                 ReplicationType: EtfReplicationTypeFromString(parts[2]),
-                Category: EtfCategoryFromString(parts[3])
+                Category: EtfCategoryFromString(parts[3]),
+                Ter: double.Parse(parts[4], CultureInfo.InvariantCulture)
             );
         }
 
